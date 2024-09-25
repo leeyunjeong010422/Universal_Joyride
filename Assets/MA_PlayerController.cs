@@ -8,6 +8,7 @@ public class MA_PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Animator animator;
+    [SerializeField] Gun gun;
 
     [SerializeField] private bool isGrounded;
 
