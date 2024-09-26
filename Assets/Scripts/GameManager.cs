@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Animator playerAnimator;
     [SerializeField] GameObject playerObject;
 
+    private bool isShieldActive;
+
     private void Awake()
     {
         // 싱글톤 패턴 구현
@@ -26,6 +28,9 @@ public class GameManager : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (isShieldActive) // 쉴드가 활성화되어 있다면 피해를 입지 않음
+            return;
+
         playerHealth--;
 
         if (playerHealth <= 0) // 0 이하로 설정
@@ -33,6 +38,16 @@ public class GameManager : MonoBehaviour
             playerAnimator.SetTrigger("Die");
             StartCoroutine(HandlePlayerDeath()); // 플레이어 사망 처리 코루틴 실행
         }
+    }
+
+    public void ActivateShield()
+    {
+        isShieldActive = true; // 쉴드 활성화
+    }
+
+    public void DeactivateShield()
+    {
+        isShieldActive = false; // 쉴드 비활성화
     }
 
     private IEnumerator HandlePlayerDeath()

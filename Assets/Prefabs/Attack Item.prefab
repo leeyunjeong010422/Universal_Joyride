@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6152813082707071819}
   - component: {fileID: 6152813082707071821}
   m_Layer: 0
-  m_Name: Gun(Item)
+  m_Name: Attack Item
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6152813082707071818}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 38.2, y: -13, z: 0}
   m_LocalScale: {x: -6, y: 6, z: 1.5162}
   m_ConstrainProportionsScale: 0

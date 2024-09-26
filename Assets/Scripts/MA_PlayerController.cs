@@ -10,6 +10,8 @@ public class MA_PlayerController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Animator armAnimator;
     [SerializeField] GameObject gunObject;
+    [SerializeField] GameObject shieldObject;
+    [SerializeField] GameObject jumpFlashObject;
 
     [SerializeField] private bool isJumping;
 
@@ -23,9 +25,11 @@ public class MA_PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        gravityScale = rigid.gravityScale;
         GameManager.Instance.playerAnimator = GetComponent<Animator>();
+        gravityScale = rigid.gravityScale;
         gunObject.SetActive(false);
+        shieldObject.SetActive(false);
+        jumpFlashObject.SetActive(false);
     }
 
     private void Update()
@@ -58,6 +62,7 @@ public class MA_PlayerController : MonoBehaviour
             rigid.gravityScale = 0;
             rigid.velocity = Vector2.zero;
             isJumping = false;
+            jumpFlashObject.SetActive(false);
         }
         else if (collision.gameObject.CompareTag("EnemyBullet"))
         {
@@ -81,6 +86,7 @@ public class MA_PlayerController : MonoBehaviour
 
         if (isJumping)
         {
+            jumpFlashObject.SetActive(true);
             animator.Play(0);
             armAnimator.Play(0);
             curAniHash = 0;
@@ -102,11 +108,26 @@ public class MA_PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             StartCoroutine(DeactivateGunAfterDelay(5f));
         }
+
+        else if (other.CompareTag("Shield"))
+        {
+            shieldObject.SetActive(true);
+            Destroy(other.gameObject);
+            GameManager.Instance.ActivateShield();
+            StartCoroutine(DeactivateShieldAfterDelay(5f));
+        }
     }
 
     private IEnumerator DeactivateGunAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         gunObject.SetActive(false);
+    }
+
+    private IEnumerator DeactivateShieldAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        shieldObject.SetActive(false);
+        GameManager.Instance.DeactivateShield();
     }
 }
