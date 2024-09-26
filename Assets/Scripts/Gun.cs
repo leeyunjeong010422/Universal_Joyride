@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
         StartCoroutine(FireBullets());
     }
 
-    private IEnumerator FireBullets()
+    public IEnumerator FireBullets()
     {
         while (true) //계속해서 총알을 발사함
         {
@@ -29,7 +29,7 @@ public class Gun : MonoBehaviour
 
                 bullet.SetActive(true); //발사할 총알 활성화
 
-                StartCoroutine(DeactivateDelay(bullet, 3f)); //총알을 3초 후에 비활성화하고 풀로 반환
+                StartCoroutine(DeactivateDelay(bullet, 0.3f)); //총알을 1초 후에 비활성화하고 풀로 반환
             }
         }
     }

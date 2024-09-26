@@ -8,9 +8,10 @@ public class MA_PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Animator animator;
+    [SerializeField] GameObject gunObject;
 
     [SerializeField] private bool isGrounded;
-    [SerializeField] private int maxJumpCount = 2; //2단 점프까지만 가능
+    [SerializeField] private int maxJumpCount = 2; // 2단 점프까지만 가능
     private int jumpCount;
 
     private float gravityScale;
@@ -25,6 +26,8 @@ public class MA_PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         gravityScale = rigid.gravityScale;
         jumpCount = 0;
+        GameManager.Instance.playerAnimator = GetComponent<Animator>();
+        gunObject.SetActive(false);
     }
 
     private void Update()
@@ -60,6 +63,10 @@ public class MA_PlayerController : MonoBehaviour
             isGrounded = true;
             jumpCount = 0;
         }
+        else if (collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            GameManager.Instance.TakeDamage();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -75,12 +82,28 @@ public class MA_PlayerController : MonoBehaviour
     {
         int checkAniHash;
 
-            checkAniHash = runHash;
+        checkAniHash = runHash;
 
         if (curAniHash != checkAniHash)
         {
             curAniHash = checkAniHash;
             animator.Play(curAniHash);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Gun"))
+        {
+            gunObject.SetActive(true);
+            Destroy(other.gameObject);
+            StartCoroutine(DeactivateGunAfterDelay(5f)); // 5초 후 총 비활성화
+        }
+    }
+
+    private IEnumerator DeactivateGunAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        gunObject.SetActive(false);
     }
 }

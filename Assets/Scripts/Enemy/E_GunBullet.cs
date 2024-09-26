@@ -21,6 +21,11 @@ public class E_GunBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Player")) // 플레이어와의 충돌 확인
+        {
+            gameObject.SetActive(false);
+        }
+
         gameObject.SetActive(false);
     }
 }

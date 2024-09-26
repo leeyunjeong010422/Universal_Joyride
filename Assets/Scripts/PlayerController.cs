@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,8 +7,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Animator animator;
     [SerializeField] GameObject armObject;
+    [SerializeField] GameObject gunObject;
 
     private float gravityScale;
+    private bool isGrounded; // 땅에 있는지 여부를 확인하는 변수
 
     private static int runHash = Animator.StringToHash("Run");
     private static int jumpHash = Animator.StringToHash("Jump");
@@ -24,13 +25,14 @@ public class PlayerController : MonoBehaviour
         gravityScale = rigid.gravityScale;
 
         armObject.SetActive(true);
+        gunObject.SetActive(false);
     }
 
     private void Update()
     {
         Run();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            isGrounded = true; // 땅에 닿으면 isGrounded를 true로 설정
             rigid.gravityScale = 0;
             rigid.velocity = Vector2.zero;
         }
@@ -61,6 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            isGrounded = false; // 땅에서 떨어지면 isGrounded를 false로 설정
             rigid.gravityScale = gravityScale;
         }
     }
@@ -74,13 +78,11 @@ public class PlayerController : MonoBehaviour
             checkAniHash = jumpHash;
             armObject.SetActive(false);
         }
-
-        else if (rigid.velocity.y < -0.5f)
+        else if (rigid.velocity.y < -0.5f && !isGrounded)
         {
-            checkAniHash = fallHash;
+            checkAniHash = fallHash; // 땅에 있지 않을 때만 fall 애니메이션 실행
             armObject.SetActive(false);
         }
-
         else
         {
             checkAniHash = runHash;
@@ -98,7 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Gun"))
         {
-            SceneManager.LoadScene("MonsterAttack");
+            gunObject.SetActive(true);
         }
     }
 }
