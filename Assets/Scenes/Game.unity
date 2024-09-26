@@ -350,11 +350,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6152813082707071820, guid: d99dbe49816658f4386c48eba41db8cd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.2
+      value: -27.1
       objectReference: {fileID: 0}
     - target: {fileID: 6152813082707071820, guid: d99dbe49816658f4386c48eba41db8cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.8
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 6152813082707071820, guid: d99dbe49816658f4386c48eba41db8cd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -634,6 +634,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1232529262 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7102355421493706398, guid: 50a6146f3e9489c4bb0d31112cf74abd, type: 3}
+  m_PrefabInstance: {fileID: 1676195438}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1244341089
 GameObject:
   m_ObjectHideFlags: 0
@@ -6477,6 +6482,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7102355422567453328, guid: 50a6146f3e9489c4bb0d31112cf74abd, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7102355422567453331, guid: 50a6146f3e9489c4bb0d31112cf74abd, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -6639,9 +6648,9 @@ MonoBehaviour:
   jumpForce: 20
   rigid: {fileID: 0}
   animator: {fileID: 0}
+  armAnimator: {fileID: 1232529262}
   gunObject: {fileID: 2111212298}
-  isGrounded: 0
-  maxJumpCount: 2
+  isJumping: 0
 --- !u!4 &2062924391 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7102355422567453331, guid: 50a6146f3e9489c4bb0d31112cf74abd, type: 3}

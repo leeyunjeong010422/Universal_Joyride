@@ -8,11 +8,10 @@ public class MA_PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Animator animator;
+    [SerializeField] Animator armAnimator;
     [SerializeField] GameObject gunObject;
 
-    [SerializeField] private bool isGrounded;
-    [SerializeField] private int maxJumpCount = 2; // 2단 점프까지만 가능
-    private int jumpCount;
+    [SerializeField] private bool isJumping;
 
     private float gravityScale;
 
@@ -25,7 +24,6 @@ public class MA_PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gravityScale = rigid.gravityScale;
-        jumpCount = 0;
         GameManager.Instance.playerAnimator = GetComponent<Animator>();
         gunObject.SetActive(false);
     }
@@ -34,7 +32,7 @@ public class MA_PlayerController : MonoBehaviour
     {
         Run();
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
@@ -50,8 +48,7 @@ public class MA_PlayerController : MonoBehaviour
     private void Jump()
     {
         rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
-        isGrounded = false;
-        jumpCount++;
+        isJumping = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -60,8 +57,7 @@ public class MA_PlayerController : MonoBehaviour
         {
             rigid.gravityScale = 0;
             rigid.velocity = Vector2.zero;
-            isGrounded = true;
-            jumpCount = 0;
+            isJumping = false;
         }
         else if (collision.gameObject.CompareTag("EnemyBullet"))
         {
@@ -74,7 +70,6 @@ public class MA_PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             rigid.gravityScale = gravityScale;
-            isGrounded = false;
         }
     }
 
@@ -84,11 +79,19 @@ public class MA_PlayerController : MonoBehaviour
 
         checkAniHash = runHash;
 
+        if (isJumping)
+        {
+            animator.Play(0);
+            armAnimator.Play(0);
+            curAniHash = 0;
+        }
+
         if (curAniHash != checkAniHash)
         {
             curAniHash = checkAniHash;
             animator.Play(curAniHash);
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -97,7 +100,7 @@ public class MA_PlayerController : MonoBehaviour
         {
             gunObject.SetActive(true);
             Destroy(other.gameObject);
-            StartCoroutine(DeactivateGunAfterDelay(5f)); // 5초 후 총 비활성화
+            StartCoroutine(DeactivateGunAfterDelay(5f));
         }
     }
 
