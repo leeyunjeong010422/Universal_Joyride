@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MA_PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
@@ -12,14 +12,13 @@ public class MA_PlayerController : MonoBehaviour
     [SerializeField] GameObject gunObject;
     [SerializeField] GameObject shieldObject;
     [SerializeField] GameObject jumpFlashObject;
-
-    [SerializeField] private bool isJumping;
-
+    
+    private bool isJumping;
     private float gravityScale;
+    private int curAniHash;
 
     private static int runHash = Animator.StringToHash("Run");
 
-    private int curAniHash;
 
     private void Start()
     {
@@ -87,6 +86,7 @@ public class MA_PlayerController : MonoBehaviour
         if (isJumping)
         {
             jumpFlashObject.SetActive(true);
+            PlayerRayCast();
             animator.Play(0);
             armAnimator.Play(0);
             curAniHash = 0;
@@ -130,4 +130,21 @@ public class MA_PlayerController : MonoBehaviour
         shieldObject.SetActive(false);
         GameManager.Instance.DeactivateShield();
     }
+
+    private void PlayerRayCast()
+    {
+        int enemyLayerMask = LayerMask.GetMask("Enemy");
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 100f, enemyLayerMask);
+        Debug.DrawRay(transform.position, Vector2.down * 100f, Color.red);
+
+        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+        {
+            Gun_Enemy_Controller enemyController = hit.collider.GetComponent<Gun_Enemy_Controller>();
+            if (enemyController != null)
+            {
+                enemyController.Die();
+            }
+        }
+    }
+
 }
