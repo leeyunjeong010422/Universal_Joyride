@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject jumpFlashObject;
     
     private bool isJumping;
+    //점프할 때 자연스럽게 중력 적용
+    //중력이 높을수록 빨리 떨어짐
+    //착지할 때 중력을 0으로 바꿔 바닥에 고정함
     private float gravityScale;
     private int curAniHash;
 
@@ -24,7 +27,6 @@ public class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        GameManager.Instance.playerAnimator = GetComponent<Animator>();
         gravityScale = rigid.gravityScale;
         gunObject.SetActive(false);
         shieldObject.SetActive(false);
@@ -54,29 +56,6 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            rigid.gravityScale = 0;
-            rigid.velocity = Vector2.zero;
-            isJumping = false;
-            jumpFlashObject.SetActive(false);
-        }
-        else if (collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            GameManager.Instance.TakeDamage();
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            rigid.gravityScale = gravityScale;
-        }
-    }
-
     private void AnimatorPlay()
     {
         int checkAniHash;
@@ -100,13 +79,36 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            rigid.gravityScale = 0;
+            rigid.velocity = Vector2.zero;
+            isJumping = false;
+            jumpFlashObject.SetActive(false);
+        }
+        else if (collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            GameManager.Instance.TakeDamage();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            rigid.gravityScale = gravityScale;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Gun"))
         {
             gunObject.SetActive(true);
             Destroy(other.gameObject);
-            StartCoroutine(DeactivateGunAfterDelay(5f));
+            StartCoroutine(DeactivateGun(5f));
         }
 
         else if (other.CompareTag("Shield"))
@@ -114,23 +116,24 @@ public class PlayerController : MonoBehaviour
             shieldObject.SetActive(true);
             Destroy(other.gameObject);
             GameManager.Instance.ActivateShield();
-            StartCoroutine(DeactivateShieldAfterDelay(5f));
+            StartCoroutine(DeactivateShield(5f));
         }
     }
 
-    private IEnumerator DeactivateGunAfterDelay(float delay)
+    private IEnumerator DeactivateGun(float delay)
     {
         yield return new WaitForSeconds(delay);
         gunObject.SetActive(false);
     }
 
-    private IEnumerator DeactivateShieldAfterDelay(float delay)
+    private IEnumerator DeactivateShield(float delay)
     {
         yield return new WaitForSeconds(delay);
         shieldObject.SetActive(false);
         GameManager.Instance.DeactivateShield();
     }
 
+    //레이캐스트를 사용하여 적을 감지하면 적 피격
     private void PlayerRayCast()
     {
         int enemyLayerMask = LayerMask.GetMask("Enemy");
