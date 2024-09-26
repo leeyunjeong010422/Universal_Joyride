@@ -8,9 +8,10 @@ public class MA_PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Animator animator;
-    [SerializeField] Gun gun;
 
     [SerializeField] private bool isGrounded;
+    [SerializeField] private int maxJumpCount = 2; //2단 점프까지만 가능
+    private int jumpCount;
 
     private float gravityScale;
 
@@ -23,13 +24,14 @@ public class MA_PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gravityScale = rigid.gravityScale;
+        jumpCount = 0;
     }
 
     private void Update()
     {
         Run();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
         {
             Jump();
         }
@@ -46,6 +48,7 @@ public class MA_PlayerController : MonoBehaviour
     {
         rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
         isGrounded = false;
+        jumpCount++;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -55,6 +58,7 @@ public class MA_PlayerController : MonoBehaviour
             rigid.gravityScale = 0;
             rigid.velocity = Vector2.zero;
             isGrounded = true;
+            jumpCount = 0;
         }
     }
 

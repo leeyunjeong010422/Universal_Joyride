@@ -17,6 +17,7 @@ public class BulletPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab);
+            bullet.transform.parent = transform;
             bullet.SetActive(false);
             bulletPool.Enqueue(bullet);
         }
@@ -39,6 +40,7 @@ public class BulletPool : MonoBehaviour
     public void ReturnBullet(GameObject bullet)
     {
         bullet.SetActive(false);
+        bullet.transform.parent = transform;
         bulletPool.Enqueue(bullet);
     }
 }
