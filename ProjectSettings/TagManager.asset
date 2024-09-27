@@ -11,6 +11,7 @@ TagManager:
   - EnemyBullet
   - Shield
   - Laser
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject gunObject;
     [SerializeField] GameObject shieldObject;
     [SerializeField] GameObject jumpFlashObject;
+    [SerializeField] GameManager gameManager;
     
     private bool isJumping;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gravityScale = rigid.gravityScale;
@@ -122,6 +124,31 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("Laser"))
         {
             GameManager.Instance.TakeDamage();
+        }
+        else if (other.CompareTag("Coin"))
+        {
+            bool isBronze = other.gameObject.name.Contains("Bronze");
+            bool isSilver = other.gameObject.name.Contains("Silver");
+            bool isGold = other.gameObject.name.Contains("Gold");
+
+            int points = 0;
+
+            if (isBronze)
+            {
+                points = 50;
+            }
+            else if (isSilver)
+            {
+                points = 70;
+            }
+            else if (isGold)
+            {
+                points = 100;
+            }
+
+            gameManager.AddScore(points);
+
+            Destroy(other.gameObject);
         }
     }
 

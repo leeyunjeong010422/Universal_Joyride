@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] int playerHealth = 3;
 
+    public int totalPoint;
+    public int stagePoint;
+
+    [SerializeField] PlayerController player;
     [SerializeField] public Animator playerAnimator;
     [SerializeField] GameObject playerObject;
 
@@ -14,8 +18,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
-
         if (Instance == null)
         {
             Instance = this;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        player = FindObjectOfType<PlayerController>();
 
         if (playerObject != null)
         {
@@ -67,5 +70,11 @@ public class GameManager : MonoBehaviour
     public int GetPlayerHealth()
     {
         return playerHealth;
+    }
+
+    public void AddScore(int points)
+    {
+        stagePoint += points;
+        totalPoint += points;
     }
 }
