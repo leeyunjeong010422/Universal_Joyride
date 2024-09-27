@@ -132,6 +132,11 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.TakeDamage();
         }
 
+        else if (collision.CompareTag("Planet"))
+        {
+            GameManager.Instance.TakeDamage();
+        }
+
         else if (collision.CompareTag("Coin"))
         {
             bool isBronze = collision.gameObject.name.Contains("Bronze");

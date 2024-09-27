@@ -6,7 +6,7 @@ public class Bomb : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
-    [SerializeField] Vector2 findSize = new Vector2(); //130, 160이 제일 적당한 듯싶음
+    [SerializeField] Vector2 findSize = new Vector2(); //170, 160이 제일 적당한 듯싶음
 
     private void Start()
     {
