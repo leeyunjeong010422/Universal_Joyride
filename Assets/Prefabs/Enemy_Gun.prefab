@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2517875907875027166}
   - component: {fileID: 2517875907875027167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MuzzlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2517875908307084961}
   - component: {fileID: 2517875908307084960}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: E_BulletController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2747764392011922426}
   - component: {fileID: 2747764392011922405}
   - component: {fileID: 2747764392011922404}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_Gun
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 2747764394147678623}
   - component: {fileID: 2747764394147678621}
   - component: {fileID: 2747764394147678622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: arm
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6567881778880897249}
   - component: {fileID: 6567881778880897250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gun
   m_TagString: Enemy
   m_Icon: {fileID: 0}

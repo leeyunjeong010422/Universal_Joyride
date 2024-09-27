@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8309318574752915957}
   - component: {fileID: 8309318574752915956}
   - component: {fileID: 8309318574752915959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8309318575435554861}
   - component: {fileID: 8309318575435554860}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,13 +307,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8309318575545396075}
   - component: {fileID: 8309318575545396074}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8309318575545396075
 Transform:
   m_ObjectHideFlags: 0
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 8309318576061461037}
   - component: {fileID: 8309318576061461036}
   - component: {fileID: 8309318576061461039}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Jump Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8309318576159211583}
   - component: {fileID: 8309318576159211580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MuzzlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 8309318576305129044}
   - component: {fileID: 8309318576305129047}
   - component: {fileID: 8309318576305129046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -563,9 +563,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8309318576305129051}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -32.28, y: -10.26, z: 0}
-  m_LocalScale: {x: -4, y: 4, z: 1}
+  m_LocalScale: {x: -10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8309318574752915957}
@@ -663,7 +663,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 7
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -682,9 +682,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11, y: -0.14}
+  m_Offset: {x: -0.11000004, y: -0.17522298}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.964777
 --- !u!114 &8309318576305129046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,8 +697,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa77137e9c203b42a20018bc9c92aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  jumpForce: 20
+  moveSpeed: 80
+  jumpForce: 40
   rigid: {fileID: 0}
   animator: {fileID: 8309318576305129041}
   armAnimator: {fileID: 8309318574752915959}
@@ -716,7 +716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8309318576471027679}
   - component: {fileID: 8309318576471027676}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BulletController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
