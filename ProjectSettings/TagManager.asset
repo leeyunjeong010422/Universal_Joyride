@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - Laser
   - Coin
+  - Bomb
   layers:
   - Default
   - TransparentFX

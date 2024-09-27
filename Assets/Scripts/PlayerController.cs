@@ -105,31 +105,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Gun"))
+        if (collision.CompareTag("Gun"))
         {
             gunObject.SetActive(true);
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
             StartCoroutine(DeactivateGun(5f));
         }
 
-        else if (other.CompareTag("Shield"))
+        else if (collision.CompareTag("Shield"))
         {
             shieldObject.SetActive(true);
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
             GameManager.Instance.ActivateShield();
             StartCoroutine(DeactivateShield(5f));
         }
-        else if (other.CompareTag("Laser"))
+
+        else if (collision.CompareTag("Laser"))
         {
             GameManager.Instance.TakeDamage();
         }
-        else if (other.CompareTag("Coin"))
+
+        else if (collision.CompareTag("Bomb"))
         {
-            bool isBronze = other.gameObject.name.Contains("Bronze");
-            bool isSilver = other.gameObject.name.Contains("Silver");
-            bool isGold = other.gameObject.name.Contains("Gold");
+            GameManager.Instance.TakeDamage();
+        }
+
+        else if (collision.CompareTag("Coin"))
+        {
+            bool isBronze = collision.gameObject.name.Contains("Bronze");
+            bool isSilver = collision.gameObject.name.Contains("Silver");
+            bool isGold = collision.gameObject.name.Contains("Gold");
 
             int points = 0;
 
@@ -148,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
             gameManager.AddScore(points);
 
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 
