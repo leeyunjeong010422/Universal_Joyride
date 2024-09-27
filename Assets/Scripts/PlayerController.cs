@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject jumpFlashObject;
     
     private bool isJumping;
+
     //점프할 때 자연스럽게 중력 적용
     //중력이 높을수록 빨리 떨어짐
     //착지할 때 중력을 0으로 바꿔 바닥에 고정함
@@ -117,6 +118,10 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             GameManager.Instance.ActivateShield();
             StartCoroutine(DeactivateShield(5f));
+        }
+        else if (other.CompareTag("Laser"))
+        {
+            GameManager.Instance.TakeDamage();
         }
     }
 

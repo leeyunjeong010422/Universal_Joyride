@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+
+
         if (Instance == null)
         {
             Instance = this;
@@ -22,6 +24,11 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        if (playerObject != null)
+        {
+            playerAnimator = playerObject.GetComponent<Animator>();
         }
     }
 
