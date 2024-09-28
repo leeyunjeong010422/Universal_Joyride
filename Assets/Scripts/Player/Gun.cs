@@ -6,8 +6,14 @@ public class Gun : MonoBehaviour
     [SerializeField] BulletPool bulletPool;
     [SerializeField] float fireRate; //총알 발사 간격
 
+    private WaitForSeconds fireRateDelay;
+    private WaitForSeconds deactivateDelay;
+
     private void Start()
     {
+        fireRateDelay = new WaitForSeconds(fireRate);
+        deactivateDelay = new WaitForSeconds(1f);
+
         StartCoroutine(FireBullets());
     }
 
@@ -16,7 +22,7 @@ public class Gun : MonoBehaviour
         while (true) //계속해서 총알을 발사함
         {
             //유니티에서 지정한 간격만큼 대기
-            yield return new WaitForSeconds(fireRate);
+            yield return fireRateDelay;
 
             //총알을 가져옴
             GameObject bullet = bulletPool.GetBullet();
@@ -29,15 +35,15 @@ public class Gun : MonoBehaviour
 
                 bullet.SetActive(true); //발사할 총알 활성화
 
-                StartCoroutine(DeactivateDelay(bullet, 1f)); //총알을 1초 후에 비활성화하고 풀로 반환
+                StartCoroutine(DeactivateDelay(bullet)); //총알을 1초 후에 비활성화하고 풀로 반환
             }
         }
     }
 
     //지정한 시간만큼 대기 후에 사용한 총알을 비활성화하고 다시 풀로 반환해줌
-    private IEnumerator DeactivateDelay(GameObject bullet, float time)
+    private IEnumerator DeactivateDelay(GameObject bullet)
     {
-        yield return new WaitForSeconds(time);
+        yield return deactivateDelay;
         bulletPool.ReturnBullet(bullet); //총알을 풀로 반환하여 비활성화함
     }
 }

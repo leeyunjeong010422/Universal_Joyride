@@ -8,12 +8,16 @@ public class Bomb : MonoBehaviour
 
     [SerializeField] Vector2 findSize = new Vector2(); //170, 160이 제일 적당한 듯싶음
 
+    private WaitForSeconds delay;
+
     private void Start()
     {
         if (animator == null)
         {
             animator = GetComponent<Animator>();
         }
+
+        delay = new WaitForSeconds(3f);
     }
 
     private void Update()
@@ -37,14 +41,14 @@ public class Bomb : MonoBehaviour
             if (playerController != null)
             {
                 animator.Play("Bomb");
-                StartCoroutine(DeactivateBomb(3));
+                StartCoroutine(DeactivateBomb());
             }
         }
     }
 
-    private IEnumerator DeactivateBomb(float delay)
+    private IEnumerator DeactivateBomb()
     {
-        yield return new WaitForSeconds(delay);
+        yield return delay;
         Destroy(gameObject);
     }
 

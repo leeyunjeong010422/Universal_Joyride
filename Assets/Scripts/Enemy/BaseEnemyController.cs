@@ -9,11 +9,15 @@ public abstract class BaseEnemyController : MonoBehaviour
     [SerializeField] protected Rigidbody2D rigid;
     [SerializeField] protected Animator animator;
     protected bool isGrounded;
+    protected WaitForSeconds delay;
 
     protected virtual void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        delay = new WaitForSeconds(animationLength);
 
         StartCoroutine(JumpRoutine());
     }
@@ -57,7 +61,7 @@ public abstract class BaseEnemyController : MonoBehaviour
     //Die 애니메이션이 끝날 때까지 기다린 후에 비활성화함
     protected IEnumerator AnimationFinished()
     {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return delay;
         gameObject.SetActive(false);
     }
 

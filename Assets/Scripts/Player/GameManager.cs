@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     private bool isShieldActive;
 
+    private WaitForSeconds delay;
+
     private void Awake()
     {
         if (Instance == null)
@@ -42,6 +44,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        float animationLength = playerAnimator.GetCurrentAnimatorStateInfo(0).length;
+        delay = new WaitForSeconds(animationLength);
+
         UpdateScoreUI();
         UpdateHealthUI();
     }
@@ -82,7 +87,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator HandlePlayerDeath()
     {
         //애니메이션의 길이만큼 대기
-        yield return new WaitForSeconds(playerAnimator.GetCurrentAnimatorStateInfo(0).length);
+        yield return delay;
         playerObject.SetActive(false);
         //Destroy(gameObject);
     }

@@ -8,11 +8,15 @@ public class Collision_Trigger_Controller : MonoBehaviour
     [SerializeField] GameObject shieldObject;
     [SerializeField] GameManager gameManager;
 
+    private WaitForSeconds delay;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         gunObject.SetActive(false);
         shieldObject.SetActive(false);
+
+        delay = new WaitForSeconds(5f);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -21,14 +25,14 @@ public class Collision_Trigger_Controller : MonoBehaviour
         {
             gunObject.SetActive(true);
             Destroy(collision.gameObject);
-            StartCoroutine(DeactivateGun(5f));
+            StartCoroutine(DeactivateGun());
         }
         else if (collision.CompareTag("Shield"))
         {
             shieldObject.SetActive(true);
             Destroy(collision.gameObject);
             gameManager.ActivateShield();
-            StartCoroutine(DeactivateShield(5f));
+            StartCoroutine(DeactivateShield());
         }
         else if (collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet"))
         {
@@ -48,15 +52,15 @@ public class Collision_Trigger_Controller : MonoBehaviour
         }
     }
 
-    private IEnumerator DeactivateGun(float delay)
+    private IEnumerator DeactivateGun()
     {
-        yield return new WaitForSeconds(delay);
+        yield return delay;
         gunObject.SetActive(false);
     }
 
-    private IEnumerator DeactivateShield(float delay)
+    private IEnumerator DeactivateShield()
     {
-        yield return new WaitForSeconds(delay);
+        yield return delay;
         shieldObject.SetActive(false);
         gameManager.DeactivateShield();
     }
