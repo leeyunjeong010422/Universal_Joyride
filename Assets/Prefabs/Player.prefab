@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa77137e9c203b42a20018bc9c92aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 40
   jumpForce: 40
   rigid: {fileID: 0}
   playerSpriteRenderer: {fileID: 0}

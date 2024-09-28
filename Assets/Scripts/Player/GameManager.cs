@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] public Animator playerAnimator;
     [SerializeField] GameObject playerObject;
+
+    [SerializeField] TextMeshProUGUI scoreText;
 
     private bool isShieldActive;
 
@@ -33,6 +36,11 @@ public class GameManager : MonoBehaviour
         {
             playerAnimator = playerObject.GetComponent<Animator>();
         }
+    }
+
+    private void Start()
+    {
+        UpdateScoreUI();
     }
 
     public void TakeDamage()
@@ -84,5 +92,11 @@ public class GameManager : MonoBehaviour
     {
         stagePoint += points;
         totalPoint += points;
+        UpdateScoreUI(); ;
+    }
+
+    public void UpdateScoreUI()
+    {
+        scoreText.text = "Score: " + stagePoint;
     }
 }

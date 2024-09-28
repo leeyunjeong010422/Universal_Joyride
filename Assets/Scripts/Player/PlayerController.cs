@@ -93,8 +93,6 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             jumpFlashObject.SetActive(false);
         }
-
-        collisionController.OnCollisionEnter2D(collision);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -103,11 +101,6 @@ public class PlayerController : MonoBehaviour
         {
             rigid.gravityScale = gravityScale;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        collisionController.OnTriggerEnter2D(collider);
     }
 
     //레이캐스트를 사용하여 적을 감지하면 적 피격
