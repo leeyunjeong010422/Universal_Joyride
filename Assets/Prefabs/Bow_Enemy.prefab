@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4821514388841037968, guid: f1f14825cb8681f4a9fa681c511f2423, type: 3}
-  poolSize: 30
+  poolSize: 20
 --- !u!1 &1754271600980020105
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056776539823929569}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 355.6, y: -26.1, z: 0}
   m_LocalScale: {x: -10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
