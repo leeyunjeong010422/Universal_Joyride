@@ -40,7 +40,15 @@ public class GameManager : MonoBehaviour
         if (isShieldActive) //쉴드가 활성화되어 있다면 피해X
             return;
 
+        if (player.gameObject.layer == 7)
+            return;
+
         playerHealth--;
+        player.gameObject.layer = 7;
+        player.playerSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        player.LeftArmSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        player.RightArmSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        player.Invoke("OffDamaged", 3);
 
         if (playerHealth <= 0)
         {

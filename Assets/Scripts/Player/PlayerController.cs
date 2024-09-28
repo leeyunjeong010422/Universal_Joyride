@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] Rigidbody2D rigid;
+    [SerializeField] public SpriteRenderer playerSpriteRenderer;
+    [SerializeField] public SpriteRenderer LeftArmSpriteRenderer;
+    [SerializeField] public SpriteRenderer RightArmSpriteRenderer;
     [SerializeField] Animator animator;
     [SerializeField] Animator armAnimator;
     [SerializeField] GameObject gunObject;
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         gravityScale = rigid.gravityScale;
         gunObject.SetActive(false);
@@ -199,4 +203,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OffDamaged()
+    {
+        gameObject.layer = 3;
+        playerSpriteRenderer.color = new Color(1, 1, 1, 1);
+        LeftArmSpriteRenderer.color = new Color(1, 1, 1, 1);
+        RightArmSpriteRenderer.color = new Color(1, 1, 1, 1);
+    }
 }
