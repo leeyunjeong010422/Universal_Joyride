@@ -186,10 +186,15 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider != null && hit.collider.CompareTag("Enemy"))
         {
-            Gun_Enemy_Controller enemyController = hit.collider.GetComponent<Gun_Enemy_Controller>();
-            if (enemyController != null)
+            GunEnemyController gunEnemyController = hit.collider.GetComponent<GunEnemyController>();
+            ArrowEnemyController arrowEnemyController = hit.collider.GetComponent<ArrowEnemyController>();
+            if (gunEnemyController != null)
             {
-                enemyController.Die();
+                gunEnemyController.Die();
+            }
+            if (arrowEnemyController != null)
+            {
+                arrowEnemyController.Die();
             }
         }
     }

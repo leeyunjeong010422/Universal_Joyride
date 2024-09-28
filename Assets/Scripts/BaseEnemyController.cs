@@ -1,39 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
-public class Gun_Enemy_Controller : MonoBehaviour
+//공통 부모 클래스
+public abstract class BaseEnemyController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
-    [SerializeField] float jumpForce;
-    [SerializeField] Rigidbody2D rigid;
-    [SerializeField] Animator animator;
-    [SerializeField] GameObject armObject;
-    [SerializeField] GameObject gunObject;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float jumpForce;
+    [SerializeField] protected Rigidbody2D rigid;
+    [SerializeField] protected Animator animator;
+    protected bool isGrounded;
 
-    private bool isGrounded;
-
-    private void Start()
+    protected virtual void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        armObject.SetActive(true);
-        gunObject.SetActive(true);
-
         StartCoroutine(JumpRoutine());
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         Run();
     }
 
-    private void Run()
+    protected virtual void Run()
     {
         transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -45,7 +40,7 @@ public class Gun_Enemy_Controller : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    protected virtual void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -53,17 +48,15 @@ public class Gun_Enemy_Controller : MonoBehaviour
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
         animator.SetTrigger("Die");
-        armObject.SetActive(false);
-        gunObject.SetActive(false);
         StartCoroutine(AnimationFinished());
     }
 
-    private IEnumerator AnimationFinished()
+    //Die 애니메이션이 끝날 때까지 기다린 후에 비활성화함
+    protected IEnumerator AnimationFinished()
     {
-        //애니메이션의 길이만큼 대기
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         gameObject.SetActive(false);
     }
@@ -72,7 +65,7 @@ public class Gun_Enemy_Controller : MonoBehaviour
     {
         while (true)
         {
-            float waitTime = Random.Range(1f, 3f); //1~3초 사이의 랜덤으로 점프
+            float waitTime = Random.Range(1f, 3f);
             yield return new WaitForSeconds(waitTime);
 
             if (isGrounded)
