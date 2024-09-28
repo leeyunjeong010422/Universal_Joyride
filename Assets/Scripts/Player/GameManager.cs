@@ -1,12 +1,14 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [SerializeField] int playerHealth = 3;
+    [SerializeField] private Image[] hearts;
 
     public int totalPoint;
     public int stagePoint;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateScoreUI();
+        UpdateHealthUI();
     }
 
     public void TakeDamage()
@@ -52,6 +55,7 @@ public class GameManager : MonoBehaviour
             return;
 
         playerHealth--;
+        UpdateHealthUI();
         player.gameObject.layer = 7;
         player.playerSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
         player.LeftArmSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
@@ -98,5 +102,20 @@ public class GameManager : MonoBehaviour
     public void UpdateScoreUI()
     {
         scoreText.text = "Score: " + stagePoint;
+    }
+
+    private void UpdateHealthUI()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < playerHealth)
+            {
+                hearts[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                hearts[i].gameObject.SetActive(false);
+            }
+        }
     }
 }
