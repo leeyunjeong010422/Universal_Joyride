@@ -351,7 +351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327444499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.620003, y: -10.799999, z: -10}
+  m_LocalPosition: {x: 43.230003, y: 6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -471,7 +471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337955659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.666767, y: 5.2348404, z: -10}
+  m_LocalPosition: {x: 43.229816, y: 5.95353, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1320,14 +1320,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3553.2522, y: -169.71046}
-      - {x: 3910.3606, y: -249.323}
-      - {x: 3720.7578, y: 50.199505}
-      - {x: 1069.3958, y: 55.509857}
-      - {x: -56.86328, y: 54.68996}
-      - {x: -57.44348, y: -45.77544}
-      - {x: 3593.6326, y: -49.14778}
-      - {x: 3311.2417, y: -269.28137}
+    - - {x: 4957.819, y: -350.85764}
+      - {x: 5213.329, y: -150.23447}
+      - {x: 5109.7183, y: -127.31524}
+      - {x: 5230.5967, y: -56.662437}
+      - {x: 5100.146, y: 55.38462}
+      - {x: -44.5971, y: 54.844196}
+      - {x: -44.568604, y: -45.41254}
+      - {x: 5080.609, y: -45.15689}
+      - {x: 5120.7554, y: -87.98964}
 --- !u!4 &1337408337
 Transform:
   m_ObjectHideFlags: 0
@@ -81136,7 +81137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 70.9, y: 16.5, z: -10}
+  m_FollowOffset: {x: 75.51, y: 33.3, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
