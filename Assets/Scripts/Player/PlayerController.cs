@@ -12,10 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public SpriteRenderer RightArmSpriteRenderer;
     [SerializeField] Animator animator;
     [SerializeField] Animator armAnimator;
-    [SerializeField] GameObject gunObject;
-    [SerializeField] GameObject shieldObject;
     [SerializeField] GameObject jumpFlashObject;
     [SerializeField] GameManager gameManager;
+    [SerializeField] Collision_Trigger_Controller collisionController;
     
     private bool isJumping;
 
@@ -34,9 +33,8 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        collisionController = GetComponent<Collision_Trigger_Controller>();
         gravityScale = rigid.gravityScale;
-        gunObject.SetActive(false);
-        shieldObject.SetActive(false);
         jumpFlashObject.SetActive(false);
     }
 
@@ -95,10 +93,8 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             jumpFlashObject.SetActive(false);
         }
-        else if (collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            GameManager.Instance.TakeDamage();
-        }
+
+        collisionController.OnCollisionEnter2D(collision);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -109,76 +105,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.CompareTag("Gun"))
-        {
-            gunObject.SetActive(true);
-            Destroy(collision.gameObject);
-            StartCoroutine(DeactivateGun(5f));
-        }
-
-        else if (collision.CompareTag("Shield"))
-        {
-            shieldObject.SetActive(true);
-            Destroy(collision.gameObject);
-            GameManager.Instance.ActivateShield();
-            StartCoroutine(DeactivateShield(5f));
-        }
-
-        else if (collision.CompareTag("Laser"))
-        {
-            GameManager.Instance.TakeDamage();
-        }
-
-        else if (collision.CompareTag("Bomb"))
-        {
-            GameManager.Instance.TakeDamage();
-        }
-
-        else if (collision.CompareTag("Planet"))
-        {
-            GameManager.Instance.TakeDamage();
-        }
-
-        else if (collision.CompareTag("Coin"))
-        {
-            bool isBronze = collision.gameObject.name.Contains("Bronze");
-            bool isSilver = collision.gameObject.name.Contains("Silver");
-            bool isGold = collision.gameObject.name.Contains("Gold");
-
-            int points = 0;
-
-            if (isBronze)
-            {
-                points = 50;
-            }
-            else if (isSilver)
-            {
-                points = 70;
-            }
-            else if (isGold)
-            {
-                points = 100;
-            }
-
-            gameManager.AddScore(points);
-
-            Destroy(collision.gameObject);
-        }
-    }
-
-    private IEnumerator DeactivateGun(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        gunObject.SetActive(false);
-    }
-
-    private IEnumerator DeactivateShield(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        shieldObject.SetActive(false);
-        GameManager.Instance.DeactivateShield();
+        collisionController.OnTriggerEnter2D(collider);
     }
 
     //레이캐스트를 사용하여 적을 감지하면 적 피격

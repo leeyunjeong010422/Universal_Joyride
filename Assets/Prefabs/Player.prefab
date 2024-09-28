@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 8309318576305129044}
   - component: {fileID: 8309318576305129047}
   - component: {fileID: 8309318576305129046}
+  - component: {fileID: 178333614}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -697,14 +698,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa77137e9c203b42a20018bc9c92aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 80
+  moveSpeed: 0
   jumpForce: 40
   rigid: {fileID: 0}
+  playerSpriteRenderer: {fileID: 0}
+  LeftArmSpriteRenderer: {fileID: 8309318574752915956}
+  RightArmSpriteRenderer: {fileID: 923998691205614656}
   animator: {fileID: 8309318576305129041}
   armAnimator: {fileID: 8309318574752915959}
+  jumpFlashObject: {fileID: 8309318576061461038}
+  gameManager: {fileID: 0}
+  collisionController: {fileID: 0}
+--- !u!114 &178333614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8309318576305129051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acbc04868844694c93bce22d161bbb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   gunObject: {fileID: 8309318575545396085}
   shieldObject: {fileID: 8309318575435554863}
-  jumpFlashObject: {fileID: 8309318576061461038}
   gameManager: {fileID: 0}
 --- !u!1 &8309318576471027678
 GameObject:
