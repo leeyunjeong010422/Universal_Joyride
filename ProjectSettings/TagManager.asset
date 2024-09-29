@@ -23,8 +23,8 @@ TagManager:
   - UI
   - Enemy
   - PlayerDamaged
-  - 
-  - 
+  - Enemy_Bullet
+  - Shield
   - 
   - 
   - 
