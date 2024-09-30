@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -98,6 +99,7 @@ public class GameManager : MonoBehaviour
     {
         yield return delay;
         playerObject.SetActive(false);
+        SceneManager.LoadScene("GameOver");
     }
 
 
