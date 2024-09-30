@@ -21,12 +21,14 @@ public class Collision_Trigger_Controller : MonoBehaviour
     {
         if (collision.CompareTag("Gun"))
         {
+            SoundManager.Instance.PlayItemSound();
             gunObject.SetActive(true);
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateGun());
         }
         else if (collision.CompareTag("Shield"))
         {
+            SoundManager.Instance.PlayItemSound();
             shieldObject.SetActive(true);
             Destroy(collision.gameObject);
             GameManager.Instance.ActivateShield();
@@ -38,6 +40,7 @@ public class Collision_Trigger_Controller : MonoBehaviour
         }
         else if (collision.CompareTag("Coin"))
         {
+            SoundManager.Instance.PlayCoinSound();
             CollectCoin(collision);
         }
     }

@@ -37,4 +37,14 @@ public abstract class BaseEnemyFire : MonoBehaviour
         yield return new WaitForSeconds(time);
         bulletPool.ReturnBullet(bullet);
     }
+
+    public void GunSound()
+    {
+        SoundManager.Instance.PlayEnemyGunSound();
+    }
+
+    public void ArrowSound()
+    {
+        SoundManager.Instance.PlayEnemyArrowSound();
+    }
 }

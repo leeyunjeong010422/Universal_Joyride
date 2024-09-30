@@ -22,6 +22,7 @@ public class SoundOnOffButton : MonoBehaviour
 
     private void ToggleSound()
     {
+        SoundManager.Instance.PlayMouseClickSound();
         SoundManager.Instance.ButtonToggle();
         UpdateButtonImage();
     }

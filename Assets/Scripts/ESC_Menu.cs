@@ -52,6 +52,7 @@ public class ESC_Menu : MonoBehaviour
 
     public void Restart()
     {
+        SoundManager.Instance.PlayMouseClickSound();
         Time.timeScale = 1f;
         SoundManager.Instance.SetStartBGM();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //현재 씬 재시작
@@ -59,6 +60,7 @@ public class ESC_Menu : MonoBehaviour
 
     public void GoToStart()
     {
+        SoundManager.Instance.PlayMouseClickSound();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Start");
     }

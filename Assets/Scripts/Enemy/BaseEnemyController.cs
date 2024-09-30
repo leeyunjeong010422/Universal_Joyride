@@ -54,6 +54,7 @@ public abstract class BaseEnemyController : MonoBehaviour
 
     public virtual void Die()
     {
+        SoundManager.Instance.PlayEnemyDyingSound();
         animator.SetTrigger("Die");
         StartCoroutine(AnimationFinished());
     }

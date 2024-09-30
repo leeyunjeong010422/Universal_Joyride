@@ -10,6 +10,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        if (player == null)
+        {
+            player = FindObjectOfType<PlayerController>().transform;
+        }
+
         StartCoroutine(SpawnEnemies());
     }
 

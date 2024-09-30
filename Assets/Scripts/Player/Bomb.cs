@@ -17,7 +17,7 @@ public class Bomb : MonoBehaviour
             animator = GetComponent<Animator>();
         }
 
-        delay = new WaitForSeconds(3f);
+        delay = new WaitForSeconds(1f);
     }
 
     private void Update()
@@ -48,6 +48,7 @@ public class Bomb : MonoBehaviour
 
     private IEnumerator DeactivateBomb()
     {
+        SoundManager.Instance.PlayBombSound();
         yield return delay;
         Destroy(gameObject);
     }
