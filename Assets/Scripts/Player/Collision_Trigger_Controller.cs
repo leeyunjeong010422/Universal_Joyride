@@ -34,7 +34,7 @@ public class Collision_Trigger_Controller : MonoBehaviour
             gameManager.ActivateShield();
             StartCoroutine(DeactivateShield());
         }
-        else if (collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet"))
+        else if (collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet") || collision.CompareTag("RandomParticle"))
         {
             gameManager.TakeDamage();
         }

@@ -14,6 +14,7 @@ TagManager:
   - Coin
   - Bomb
   - Planet
+  - RandomParticle
   layers:
   - Default
   - TransparentFX
