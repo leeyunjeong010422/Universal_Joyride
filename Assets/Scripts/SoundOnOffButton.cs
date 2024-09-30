@@ -23,7 +23,6 @@ public class SoundOnOffButton : MonoBehaviour
     private void ToggleSound()
     {
         SoundManager.Instance.ButtonToggle();
-
         UpdateButtonImage();
     }
 

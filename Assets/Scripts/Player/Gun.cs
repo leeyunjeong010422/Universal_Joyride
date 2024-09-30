@@ -35,6 +35,8 @@ public class Gun : MonoBehaviour
 
                 bullet.SetActive(true); //발사할 총알 활성화
 
+                SoundManager.Instance.PlayGunSound(); //발사할 때마다 사운드 발생
+
                 StartCoroutine(DeactivateDelay(bullet)); //총알을 1초 후에 비활성화하고 풀로 반환
             }
         }

@@ -3,11 +3,11 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    [SerializeField] AudioSource audioSource;
 
-    [SerializeField] AudioClip startBGM;
+    [SerializeField] private AudioSource startBGM;
+    [SerializeField] private AudioSource gunClip;
 
-    //이전 BGM 위치 저장해두어서 멈췄다가 다시 실행해도 이어서 실행하도록 함
+    //이전 BGM 위치 저장
     private float previousTime = 0f;
 
     private void Awake()
@@ -16,7 +16,6 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            audioSource = GetComponent<AudioSource>();
         }
         else
         {
@@ -29,33 +28,40 @@ public class SoundManager : MonoBehaviour
         PlayBGM(startBGM);
     }
 
-    public void PlayBGM(AudioClip bgm)
+    public void PlayBGM(AudioSource bgm)
     {
-        audioSource.clip = bgm;
-        audioSource.loop = true;
-        audioSource.Play();
+        bgm.loop = true;
+        bgm.Play();
         previousTime = 0f;
     }
 
     public void StopBGM()
     {
-        previousTime = audioSource.time;
-        audioSource.Stop();
+        previousTime = startBGM.time; //startBGM의 현재 시간 저장
+        startBGM.Stop();
     }
 
     public void ResumeBGM()
     {
-        audioSource.time = previousTime;
-        audioSource.Play();
+        startBGM.time = previousTime; //이전 시간으로 복구
+        startBGM.Play();
     }
 
     public void ButtonToggle()
     {
-        audioSource.mute = !audioSource.mute;
+        if (startBGM != null)
+        {
+            startBGM.mute = !startBGM.mute;
+        }
     }
 
     public bool IsSoundMuted()
     {
-        return audioSource.mute;
+        return startBGM != null && startBGM.mute; //음소거 상태 반환
+    }
+
+    public void PlayGunSound()
+    {
+        gunClip.PlayOneShot(gunClip.clip); //총 소리 재생
     }
 }
