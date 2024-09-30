@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323141323535298546}
   m_Layer: 0
-  m_Name: EnemyRandomMake
+  m_Name: Random Enemy Make
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
