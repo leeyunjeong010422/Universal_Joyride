@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1212558513503733394}
   - component: {fileID: 1212558513503733395}
   m_Layer: 0
-  m_Name: Random Particle
+  m_Name: Random Particle Make
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1212558513503733404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 114.39244, y: 49.125484, z: -2.7413552}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491df7bc1f7ac80469d7ba22ccca74c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 0}
+  particle: {fileID: 6196534740068680314, guid: 531fce2ca7c500f4b925af2322506468, type: 3}
   spawnInterval: 3
   spawnArea: {x: 0, y: 1}
   moveSpeed: 80

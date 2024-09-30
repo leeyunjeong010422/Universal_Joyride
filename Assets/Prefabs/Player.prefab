@@ -683,9 +683,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11000004, y: -0.17522298}
+  m_Offset: {x: -0.11000004, y: -0.26686916}
   serializedVersion: 2
-  m_Radius: 0.964777
+  m_Radius: 0.8731308
 --- !u!114 &8309318576305129046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +723,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunObject: {fileID: 8309318575545396085}
   shieldObject: {fileID: 8309318575435554863}
-  gameManager: {fileID: 0}
 --- !u!1 &8309318576471027678
 GameObject:
   m_ObjectHideFlags: 0
