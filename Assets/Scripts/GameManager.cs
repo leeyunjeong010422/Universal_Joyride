@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    //인스펙터에 Cinemachine Impulse Listener + Cinemachine Impulse Source 추가하기
+    //Duration: 지속시간, Amplitude: 흔들림 강도, Frequency: 주파수(흔들림 속도) 알맞게 설정하기 
+    public Cinemachine.CinemachineImpulseSource impulseSource; //카메라 흔들리게 하기
+
     //초기 설정값을 저장하는 변수
     //얘를 안 해 주면 재시작했을 때 목숨이 이상하게 전달됨
     [SerializeField] private int initialPlayerHealth = 3;
@@ -90,6 +94,8 @@ public class GameManager : MonoBehaviour
             .Select(heart => heart.GetComponent<Image>())
             .ToArray();
 
+        impulseSource = FindObjectOfType<Cinemachine.CinemachineImpulseSource>();
+
         float animationLength = playerAnimator != null ? playerAnimator.GetCurrentAnimatorStateInfo(0).length : 0;
         delay = new WaitForSeconds(animationLength);
     }
@@ -104,6 +110,7 @@ public class GameManager : MonoBehaviour
             if (player.gameObject.layer == 7)
                 return;
 
+            impulseSource.GenerateImpulse();
             SoundManager.Instance.PlayAttackSound();
             playerHealth--;
             UpdateHealthUI();
