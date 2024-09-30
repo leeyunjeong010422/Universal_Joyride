@@ -34,13 +34,21 @@ public class Collision_Trigger_Controller : MonoBehaviour
             gameManager.ActivateShield();
             StartCoroutine(DeactivateShield());
         }
-        else if (collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet") || collision.CompareTag("RandomParticle"))
+        else if (collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet"))
         {
             gameManager.TakeDamage();
         }
         else if (collision.CompareTag("Coin"))
         {
             CollectCoin(collision);
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("RandomParticle"))
+        {
+            gameManager.TakeDamage();
         }
     }
 
