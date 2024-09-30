@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Collision_Trigger_Controller : MonoBehaviour
 {
@@ -50,6 +51,11 @@ public class Collision_Trigger_Controller : MonoBehaviour
         if (other.CompareTag("RandomParticle"))
         {
             GameManager.Instance.TakeDamage();
+        }
+
+        if (other.CompareTag("BossRoomPortal"))
+        {
+            SceneManager.LoadScene("BossRroom");
         }
     }
 

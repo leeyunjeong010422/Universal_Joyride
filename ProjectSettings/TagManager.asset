@@ -16,6 +16,7 @@ TagManager:
   - Planet
   - RandomParticle
   - Heart
+  - BossRoomPortal
   layers:
   - Default
   - TransparentFX
