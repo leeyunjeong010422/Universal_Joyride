@@ -6,13 +6,11 @@ public class Collision_Trigger_Controller : MonoBehaviour
 {
     [SerializeField] GameObject gunObject;
     [SerializeField] GameObject shieldObject;
-    [SerializeField] GameManager gameManager;
 
     private WaitForSeconds delay;
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
         gunObject.SetActive(false);
         shieldObject.SetActive(false);
 
@@ -31,12 +29,12 @@ public class Collision_Trigger_Controller : MonoBehaviour
         {
             shieldObject.SetActive(true);
             Destroy(collision.gameObject);
-            gameManager.ActivateShield();
+            GameManager.Instance.ActivateShield();
             StartCoroutine(DeactivateShield());
         }
         else if (collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet"))
         {
-            gameManager.TakeDamage();
+            GameManager.Instance.TakeDamage();
         }
         else if (collision.CompareTag("Coin"))
         {
@@ -48,7 +46,7 @@ public class Collision_Trigger_Controller : MonoBehaviour
     {
         if (other.CompareTag("RandomParticle"))
         {
-            gameManager.TakeDamage();
+            GameManager.Instance.TakeDamage();
         }
     }
 
@@ -70,7 +68,7 @@ public class Collision_Trigger_Controller : MonoBehaviour
     {
         yield return delay;
         shieldObject.SetActive(false);
-        gameManager.DeactivateShield();
+        GameManager.Instance.DeactivateShield();
     }
 
     private void CollectCoin(Collider2D collision)
@@ -94,7 +92,7 @@ public class Collision_Trigger_Controller : MonoBehaviour
             points = 100;
         }
 
-        gameManager.AddScore(points);
+        GameManager.Instance.AddScore(points);
         Destroy(collision.gameObject);
     }
 }

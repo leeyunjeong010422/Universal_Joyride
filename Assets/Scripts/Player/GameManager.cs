@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -16,11 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] public Animator playerAnimator;
     [SerializeField] GameObject playerObject;
-
     [SerializeField] TextMeshProUGUI scoreText;
 
     private bool isShieldActive;
-
     private WaitForSeconds delay;
 
     private void Awake()
@@ -34,16 +33,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
         player = FindObjectOfType<PlayerController>();
 
         if (playerObject != null)
         {
             playerAnimator = playerObject.GetComponent<Animator>();
         }
-    }
 
-    private void Start()
-    {
         float animationLength = playerAnimator.GetCurrentAnimatorStateInfo(0).length;
         delay = new WaitForSeconds(animationLength);
 
@@ -58,20 +58,30 @@ public class GameManager : MonoBehaviour
 
         if (player.gameObject.layer == 7)
             return;
-
+        
         playerHealth--;
         UpdateHealthUI();
+        PlayerDamaged();
+
+        if (playerHealth < 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        playerAnimator.SetTrigger("Die");
+        StartCoroutine(HandlePlayerDeath());
+    }
+
+    private void PlayerDamaged()
+    {
         player.gameObject.layer = 7;
         player.playerSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
         player.LeftArmSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
         player.RightArmSpriteRenderer.color = new Color(1, 1, 1, 0.4f);
         player.Invoke("OffDamaged", 3);
-
-        if (playerHealth <= 0)
-        {
-            playerAnimator.SetTrigger("Die");
-            StartCoroutine(HandlePlayerDeath());
-        }
     }
 
     public void ActivateShield()
@@ -86,11 +96,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator HandlePlayerDeath()
     {
-        //애니메이션의 길이만큼 대기
         yield return delay;
         playerObject.SetActive(false);
-        //Destroy(gameObject);
     }
+
 
     public int GetPlayerHealth()
     {
