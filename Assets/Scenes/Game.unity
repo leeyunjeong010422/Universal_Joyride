@@ -81939,6 +81939,14 @@ PrefabInstance:
       propertyPath: spawnArea.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1212558513503733395, guid: 3a7b73c09f20d204e925f7b3d7519691, type: 3}
+      propertyPath: spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1212558513503733395, guid: 3a7b73c09f20d204e925f7b3d7519691, type: 3}
+      propertyPath: particleLifetime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1212558513503733404, guid: 3a7b73c09f20d204e925f7b3d7519691, type: 3}
       propertyPath: m_Name
       value: Random Particle

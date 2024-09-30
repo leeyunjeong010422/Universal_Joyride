@@ -6,10 +6,10 @@ using UnityEngine;
 public class RandomParticleSpawner : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
-    [SerializeField] float spawnInterval = 3f; //3초마다 파티클 생성
+    [SerializeField] float spawnInterval = 5f; //3초마다 파티클 생성
     [SerializeField] Vector2 spawnArea = new Vector2(0f, 0.5f); //생성 범위(Y축만 랜덤)
     [SerializeField] float moveSpeed = 80f;
-    [SerializeField] float particleLifetime = 5f; //파티클 생존 시간 (5초 뒤에 파괴)
+    [SerializeField] float particleLifetime = 3f; //파티클 생존 시간 (5초 뒤에 파괴)
 
     private Camera mainCamera;
     private Queue<(ParticleSystem particle, float spawnTime)> activeParticles = new Queue<(ParticleSystem, float)>(); //현재 활성화된 파티클과 시간을 저장
@@ -34,14 +34,20 @@ public class RandomParticleSpawner : MonoBehaviour
     {
         while (true)
         {
-            //카메라 뷰포트에서 오른쪽 끝 부분의 월드 좌표(뷰포트 좌표 (1, y, z))
-            Vector2 spawnPosition = mainCamera.ViewportToWorldPoint(new Vector2(1, Random.Range(0f, 0.5f)));
-            spawnPosition.y += Random.Range(-spawnArea.y, spawnArea.y); //Y축 범위에서 랜덤하게 위치 설정
+            int randomCount = Random.Range(1, 3);
 
-            // 파티클 생성
-            ParticleSystem newParticle = Instantiate(particle, spawnPosition, Quaternion.identity);
-            newParticle.Play();
-            activeParticles.Enqueue((newParticle, Time.time)); //생성된 파티클과 생성 시간 추가
+            for (int j = 0; j < randomCount; j++)
+            {
+
+                //카메라 뷰포트에서 오른쪽 끝 부분의 월드 좌표(뷰포트 좌표 (1, y, z))
+                Vector2 spawnPosition = mainCamera.ViewportToWorldPoint(new Vector2(1, Random.Range(0.2f, 0.8f)));
+                spawnPosition.y += Random.Range(-spawnArea.y, spawnArea.y); //Y축 범위에서 랜덤하게 위치 설정
+
+                // 파티클 생성
+                ParticleSystem newParticle = Instantiate(particle, spawnPosition, Quaternion.identity);
+                newParticle.Play();
+                activeParticles.Enqueue((newParticle, Time.time)); //생성된 파티클과 생성 시간 추가
+            }
 
             yield return waitForSpawnInterval;
         }
