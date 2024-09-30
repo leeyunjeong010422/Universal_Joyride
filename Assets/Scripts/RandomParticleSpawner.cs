@@ -40,6 +40,8 @@ public class RandomParticleSpawner : MonoBehaviour
             {
 
                 //카메라 뷰포트에서 오른쪽 끝 부분의 월드 좌표(뷰포트 좌표 (1, y, z))
+                //카메라 이해: https://ansohxxn.github.io/unitydocs/camera/
+                //          : https://m.blog.naver.com/corncho456/221727952827
                 Vector2 spawnPosition = mainCamera.ViewportToWorldPoint(new Vector2(1, Random.Range(0.2f, 0.8f)));
                 spawnPosition.y += Random.Range(-spawnArea.y, spawnArea.y); //Y축 범위에서 랜덤하게 위치 설정
 
