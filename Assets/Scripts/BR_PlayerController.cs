@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
 public class BR_PlayerController : MonoBehaviour
@@ -10,20 +9,26 @@ public class BR_PlayerController : MonoBehaviour
     private int currentHP;
 
     public Slider hpBar;
+    private bool isInvincible = false;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer rightSpriteRenderer; 
+    [SerializeField] SpriteRenderer leftSpriteRenderer; 
 
     private void Start()
     {
         hpBar = GameObject.Find("PlayerHP").GetComponent<Slider>();
         currentHP = maxHP;
         UpdateHPBar();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnParticleCollision(GameObject other)
     {
-        if (collision.gameObject.CompareTag("BossAttack"))
+        if (other.CompareTag("BossAttack") && !isInvincible) //무적 상태가 아닐 때만 데미지 받기
         {
-            Debug.Log("플레이어");
             TakeDamage(10);
+            StartCoroutine(ActivateInvincibility(3f)); //3초간 무적 상태 유지
         }
     }
 
@@ -35,6 +40,8 @@ public class BR_PlayerController : MonoBehaviour
 
         if (currentHP <= 0)
         {
+            SoundManager.Instance.StopBGM();
+            SoundManager.Instance.PlayGameOverSound();
             SceneManager.LoadScene("GameOver");
         }
     }
@@ -45,5 +52,28 @@ public class BR_PlayerController : MonoBehaviour
         {
             hpBar.value = currentHP;
         }
+    }
+
+    private IEnumerator ActivateInvincibility(float duration)
+    {
+        isInvincible = true; 
+
+        //반투명 효과 시작
+        Color originalColor = spriteRenderer.color; //원래 색상 저장
+        Color rightOriginalColor = rightSpriteRenderer.color;
+        Color leftOriginalColor = leftSpriteRenderer.color;
+
+        spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f); //알파 값 0.5로 설정
+        rightSpriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
+        leftSpriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
+
+        yield return new WaitForSeconds(duration); //duration 동안 대기
+
+        //원래 색상으로 복구
+        spriteRenderer.color = originalColor;
+        rightSpriteRenderer.color = rightOriginalColor;
+        leftSpriteRenderer.color = leftOriginalColor;
+
+        isInvincible = false; // 무적 상태 비활성화
     }
 }

@@ -55,7 +55,7 @@ public class BossController : MonoBehaviour
             Destroy(particle); //파티클 제거
 
             //공격 후 잠시 대기 (n초 후 다시 공격)
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

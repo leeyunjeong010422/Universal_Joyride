@@ -3798,7 +3798,7 @@ ParticleSystem:
     m_EnergyLossOnCollision:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3850,7 +3850,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 1
+    radiusScale: 1.62
     collidesWith:
       serializedVersion: 2
       m_Bits: 4294967295
@@ -4895,7 +4895,7 @@ BoxCollider:
   m_GameObject: {fileID: 8539780249416088054}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 22.93886, y: 6.251617, z: 14.2}
   m_Center: {x: 2.2615528, y: -0.28543934, z: 0}
@@ -4981,6 +4981,22 @@ PrefabInstance:
     - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
       propertyPath: startDelay.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.radiusScale
+      value: 1.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
@@ -5072,6 +5088,22 @@ PrefabInstance:
       propertyPath: startDelay.scalar
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.radiusScale
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
 --- !u!4 &8539780250780440887 stripped
@@ -5161,6 +5193,22 @@ PrefabInstance:
     - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
       propertyPath: startDelay.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.radiusScale
+      value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042010290544875451, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8de8580df319a5a43b103ee8b0283bc7, type: 3}

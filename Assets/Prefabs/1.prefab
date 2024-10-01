@@ -3791,7 +3791,7 @@ ParticleSystem:
     m_EnergyLossOnCollision:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3843,7 +3843,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 0.63
+    radiusScale: 1.54
     collidesWith:
       serializedVersion: 2
       m_Bits: 4294967295
@@ -4940,7 +4940,7 @@ BoxCollider:
   m_GameObject: {fileID: 7865935415342105898}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 10.022724, y: 3.292609, z: 14.2}
   m_Center: {x: 0.000009377798, y: 0.090247475, z: 0}

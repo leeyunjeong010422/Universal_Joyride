@@ -19,6 +19,7 @@ TagManager:
   - BossRoomPortal
   - BossAttack
   - BossGun
+  - BossPlayer
   layers:
   - Default
   - TransparentFX
