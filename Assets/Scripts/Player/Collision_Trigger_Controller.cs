@@ -63,7 +63,7 @@ public class Collision_Trigger_Controller : MonoBehaviour
 
         if (other.CompareTag("BossRoomPortal"))
         {
-            SceneManager.LoadScene("BossRroom");
+            SceneManager.LoadScene("Fake");
         }
     }
 

@@ -54,6 +54,16 @@ public class SoundManager : MonoBehaviour
         startBGM.Stop();
     }
 
+    public void MuteAllSounds()
+    {
+        AudioListener.pause = true; //모든 사운드를 일시 정지
+    }
+
+    public void UnmuteAllSounds()
+    {
+        AudioListener.pause = false; //모든 사운드를 다시 활성화
+    }
+
     public void ResumeBGM()
     {
         startBGM.time = previousTime; //이전 시간으로 복구
