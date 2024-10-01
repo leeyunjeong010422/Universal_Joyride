@@ -20,6 +20,7 @@ TagManager:
   - BossAttack
   - BossGun
   - BossPlayer
+  - BossRandomParticle
   layers:
   - Default
   - TransparentFX

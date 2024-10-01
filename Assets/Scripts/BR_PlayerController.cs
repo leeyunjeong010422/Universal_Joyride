@@ -12,7 +12,9 @@ public class BR_PlayerController : MonoBehaviour
     private bool isInvincible = false;
     private SpriteRenderer spriteRenderer;
     [SerializeField] SpriteRenderer rightSpriteRenderer; 
-    [SerializeField] SpriteRenderer leftSpriteRenderer; 
+    [SerializeField] SpriteRenderer leftSpriteRenderer;
+
+    public Cinemachine.CinemachineImpulseSource impulseSource; //카메라 흔들리게 하기
 
     private void Start()
     {
@@ -29,6 +31,12 @@ public class BR_PlayerController : MonoBehaviour
         {
             TakeDamage(10);
             StartCoroutine(ActivateInvincibility(3f)); //3초간 무적 상태 유지
+        }
+
+        if (other.CompareTag("BossRandomParticle") && !isInvincible)
+        {
+            TakeDamage(10);
+            StartCoroutine(ActivateInvincibility(3f));
         }
     }
 
@@ -56,8 +64,9 @@ public class BR_PlayerController : MonoBehaviour
 
     private IEnumerator ActivateInvincibility(float duration)
     {
-        isInvincible = true; 
+        isInvincible = true;
 
+        impulseSource.GenerateImpulse();
         //반투명 효과 시작
         Color originalColor = spriteRenderer.color; //원래 색상 저장
         Color rightOriginalColor = rightSpriteRenderer.color;
