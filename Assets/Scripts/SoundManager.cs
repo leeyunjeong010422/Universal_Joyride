@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource bossSoundClip;
     [SerializeField] private AudioSource warningClip;
     [SerializeField] private AudioSource gameClearClip;
+    [SerializeField] private AudioSource playerJumpClip;
 
     //이전 BGM 위치 저장
     private float previousTime = 0f;
@@ -135,5 +136,10 @@ public class SoundManager : MonoBehaviour
     public void PlayGameClaerSound()
     {
         gameClearClip.PlayOneShot(gameClearClip.clip); //게임 클리어 소리 재생
+    }
+
+    public void PlayPlayerJumpSound()
+    {
+        playerJumpClip.PlayOneShot(playerJumpClip.clip); //플레이어 점프 소리 재생
     }
 }

@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        SoundManager.Instance.PlayPlayerJumpSound();
         rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
         isJumping = true;
     }
