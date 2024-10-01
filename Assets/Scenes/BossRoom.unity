@@ -9404,6 +9404,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 936708893}
     - target: {fileID: 3160861332094157682, guid: 1552673de99f8834ebd896bc658dcc69, type: 3}
+      propertyPath: impulseSource
+      value: 
+      objectReference: {fileID: 1141697394}
+    - target: {fileID: 3160861332094157682, guid: 1552673de99f8834ebd896bc658dcc69, type: 3}
       propertyPath: armSpriteRenderer
       value: 
       objectReference: {fileID: 665925896}
