@@ -35,6 +35,7 @@ public class BossHp : MonoBehaviour
         if (currentHP <= 0)
         {
             SoundManager.Instance.StopBGM();
+            SoundManager.Instance.PlayGameClaerSound();
             SceneManager.LoadScene("GameClear");
         }
     }

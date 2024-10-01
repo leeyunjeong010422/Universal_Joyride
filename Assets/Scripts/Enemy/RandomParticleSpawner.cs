@@ -11,6 +11,11 @@ public class RandomParticleSpawner : MonoBehaviour
     [SerializeField] float moveSpeed = 80f;
     [SerializeField] float particleLifetime = 3f; //파티클 생존 시간 (5초 뒤에 파괴)
 
+    [SerializeField] Sprite warningSprite;
+    [SerializeField] Vector2 warningSize = new Vector2(10f, 10f);
+    [SerializeField] float warningDuration = 2f; //지속 시간
+    [SerializeField] float blinkInterval = 0.2f; //깜빡임 간격
+
     private Camera mainCamera;
     private Queue<(ParticleSystem particle, float spawnTime)> activeParticles = new Queue<(ParticleSystem, float)>(); //현재 활성화된 파티클과 시간을 저장
     private WaitForSeconds waitForSpawnInterval; //생성 주기 대기를 위한 코루틴
@@ -42,10 +47,17 @@ public class RandomParticleSpawner : MonoBehaviour
                 //카메라 뷰포트에서 오른쪽 끝 부분의 월드 좌표(뷰포트 좌표 (1, y, z))
                 //카메라 이해: https://ansohxxn.github.io/unitydocs/camera/
                 //          : https://m.blog.naver.com/corncho456/221727952827
-                Vector2 spawnPosition = mainCamera.ViewportToWorldPoint(new Vector2(1, Random.Range(0.2f, 0.8f)));
-                spawnPosition.y += Random.Range(-spawnArea.y, spawnArea.y); //Y축 범위에서 랜덤하게 위치 설정
+                Vector2 warningPosition = mainCamera.ViewportToWorldPoint(new Vector2(0.9f, Random.Range(0.2f, 0.8f)));
+                warningPosition.y += Random.Range(-spawnArea.y, spawnArea.y); //Y축 범위에서 랜덤하게 위치 설정
 
-                // 파티클 생성
+                //공격 예정 위치에 경고 이미지 생성
+                SoundManager.Instance.PlayWarningSound();
+                GameObject warning = CreateWarning(warningPosition);
+                yield return StartCoroutine(BlinkEffect(warning));
+                Destroy(warning);
+
+                //파티클 생성 (위치: 위에 warningPosition가 발생한 위치보다 조금 더 오른쪽에서 생성)
+                Vector2 spawnPosition = mainCamera.ViewportToWorldPoint(new Vector2(1.1f, mainCamera.WorldToViewportPoint(warningPosition).y));
                 ParticleSystem newParticle = Instantiate(particle, spawnPosition, Quaternion.identity);
                 newParticle.Play();
                 activeParticles.Enqueue((newParticle, Time.time)); //생성된 파티클과 생성 시간 추가
@@ -58,7 +70,7 @@ public class RandomParticleSpawner : MonoBehaviour
     private void FixedUpdate()
     {
         int particleCount = activeParticles.Count;
-        
+
         //모든 활성화된 파티클 이동 처리
         for (int i = 0; i < particleCount; i++)
         {
@@ -81,5 +93,39 @@ public class RandomParticleSpawner : MonoBehaviour
                 }
             }
         }
+    }
+
+    private GameObject CreateWarning(Vector3 position)
+    {
+        //경고 이미지를 표시할 GameObject 생성
+        GameObject warning = new GameObject("ParticleWarning");
+        SpriteRenderer spriteRenderer = warning.AddComponent<SpriteRenderer>();
+
+        spriteRenderer.sprite = warningSprite;
+        spriteRenderer.color = Color.red;
+        warning.transform.localScale = warningSize; //이미지 크기 조절
+        warning.transform.position = position; //위치 설정
+
+        warning.transform.SetParent(mainCamera.transform);
+
+        return warning;
+    }
+
+    private IEnumerator BlinkEffect(GameObject warning)
+    {
+        SpriteRenderer renderer = warning.GetComponent<SpriteRenderer>(); //이미지 가져오기
+
+        float elapsedTime = 0f;
+        bool isVisible = true;
+
+        while (elapsedTime < warningDuration) //경과한 시간이 warningDuration보다 작을 때
+        {
+            renderer.enabled = isVisible;
+            isVisible = !isVisible;
+            elapsedTime += blinkInterval;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
+        renderer.enabled = true;
     }
 }
