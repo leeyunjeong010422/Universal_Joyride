@@ -11,14 +11,22 @@ public abstract class BaseEnemyController : MonoBehaviour
     protected bool isGrounded;
     protected WaitForSeconds delay;
 
-    protected virtual void Start()
+    protected virtual void OnEnable()
+    {
+        Initialize();
+    }
+
+    protected virtual void Initialize()
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
         delay = new WaitForSeconds(animationLength);
+    }
 
+    protected virtual void Start()
+    {
         StartCoroutine(JumpRoutine());
     }
 

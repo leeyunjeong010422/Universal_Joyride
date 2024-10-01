@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         //총알을 오른쪽으로 발사
         rb.velocity = transform.right * bulletSpeed;

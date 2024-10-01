@@ -9,17 +9,16 @@ public class Gun : MonoBehaviour
     private WaitForSeconds fireRateDelay;
     private WaitForSeconds deactivateDelay;
 
-    private void Start()
+    private void OnEnable()
     {
         fireRateDelay = new WaitForSeconds(fireRate);
         deactivateDelay = new WaitForSeconds(1.3f);
-
         StartCoroutine(FireBullets());
     }
 
     public IEnumerator FireBullets()
     {
-        while (true) //계속해서 총알을 발사함
+        while (gameObject.activeSelf) //계속해서 총알을 발사함
         {
             //유니티에서 지정한 간격만큼 대기
             yield return fireRateDelay;

@@ -19,4 +19,11 @@ public class ArrowEnemyController : BaseEnemyController
         armObject.SetActive(false);
         arrowObject.SetActive(false);
     }
+
+    public void Reset()
+    {
+        base.Initialize();
+        armObject.SetActive(true);
+        arrowObject.SetActive(true);
+    }
 }

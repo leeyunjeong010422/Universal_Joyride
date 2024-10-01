@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-//적의 발사 행위에 대한 부모 클래스
 public abstract class BaseEnemyFire : MonoBehaviour
 {
     [SerializeField] protected BaseBulletPool bulletPool;
     [SerializeField] protected float fireRate;
 
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
         StartCoroutine(FireBullets());
     }
@@ -28,6 +27,9 @@ public abstract class BaseEnemyFire : MonoBehaviour
                 bullet.SetActive(true);
 
                 StartCoroutine(DeactivateDelay(bullet, 2f));
+
+                // 총알 발사 시 사운드 재생
+                GunSound();
             }
         }
     }

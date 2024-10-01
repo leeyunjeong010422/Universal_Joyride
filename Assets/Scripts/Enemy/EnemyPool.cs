@@ -38,6 +38,18 @@ public class EnemyPool : MonoBehaviour
     //적을 반환하는 메서드
     public void ReturnEnemy(GameObject enemy)
     {
+        GunEnemyController enemyController = enemy.GetComponent<GunEnemyController>();
+        if (enemyController != null)
+        {
+            enemyController.Reset();
+        }
+
+        ArrowEnemyController enemyController1 = enemy.GetComponent<ArrowEnemyController>();
+        if (enemyController1 != null)
+        {
+            enemyController1.Reset();
+        }
+
         enemy.SetActive(false);
         enemyPool.Enqueue(enemy); //큐에 다시 추가
     }

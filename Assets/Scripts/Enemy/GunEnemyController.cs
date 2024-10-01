@@ -19,4 +19,11 @@ public class GunEnemyController : BaseEnemyController
         armObject.SetActive(false);
         gunObject.SetActive(false);
     }
+
+    public void Reset()
+    {
+        base.Initialize();
+        armObject.SetActive(true);
+        gunObject.SetActive(true);
+    }
 }
