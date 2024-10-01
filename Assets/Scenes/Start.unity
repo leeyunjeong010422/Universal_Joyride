@@ -598,14 +598,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1916655250}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: ChangeStartGameSecene
+        m_MethodName: ChangeGameWaySecene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game
+          m_StringArgument: GameWay
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &239395508
