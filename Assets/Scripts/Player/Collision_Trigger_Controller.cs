@@ -27,6 +27,14 @@ public class Collision_Trigger_Controller : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateGun());
         }
+
+        if (collision.CompareTag("BossGun"))
+        {
+            SoundManager.Instance.PlayItemSound();
+            gunObject.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+
         else if (collision.CompareTag("Shield"))
         {
             SoundManager.Instance.PlayItemSound();
@@ -35,7 +43,7 @@ public class Collision_Trigger_Controller : MonoBehaviour
             GameManager.Instance.ActivateShield();
             StartCoroutine(DeactivateShield());
         }
-        else if (collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet"))
+        else if (collision.CompareTag("EnemyBullet") || collision.CompareTag("Laser") || collision.CompareTag("Bomb") || collision.CompareTag("Planet"))
         {
             GameManager.Instance.TakeDamage();
         }
@@ -56,14 +64,6 @@ public class Collision_Trigger_Controller : MonoBehaviour
         if (other.CompareTag("BossRoomPortal"))
         {
             SceneManager.LoadScene("BossRroom");
-        }
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            GameManager.Instance.TakeDamage();
         }
     }
 

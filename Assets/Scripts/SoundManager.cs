@@ -15,6 +15,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource enemyArrowClip;
     [SerializeField] private AudioSource bombClip;
     [SerializeField] private AudioSource enemyDyingClip;
+    [SerializeField] private AudioSource bossSoundClip;
+    [SerializeField] private AudioSource warningClip;
 
     //이전 BGM 위치 저장
     private float previousTime = 0f;
@@ -117,5 +119,15 @@ public class SoundManager : MonoBehaviour
     public void PlayEnemyDyingSound()
     {
         enemyDyingClip.PlayOneShot(enemyDyingClip.clip); //적 피격 소리 재생
+    }
+
+    public void PlayBossSound()
+    {
+        bossSoundClip.PlayOneShot(bossSoundClip.clip); //보스 공격 소리 재생
+    }
+
+    public void PlayWarningSound()
+    {
+        warningClip.PlayOneShot(warningClip.clip); //경고 소리 재생
     }
 }

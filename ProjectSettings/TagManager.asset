@@ -17,6 +17,8 @@ TagManager:
   - RandomParticle
   - Heart
   - BossRoomPortal
+  - BossAttack
+  - BossGun
   layers:
   - Default
   - TransparentFX

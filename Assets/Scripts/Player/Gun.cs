@@ -12,7 +12,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         fireRateDelay = new WaitForSeconds(fireRate);
-        deactivateDelay = new WaitForSeconds(1f);
+        deactivateDelay = new WaitForSeconds(1.3f);
 
         StartCoroutine(FireBullets());
     }
