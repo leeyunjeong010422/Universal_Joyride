@@ -9,6 +9,9 @@ public class BulletPool : MonoBehaviour
 
     private Queue<GameObject> bulletPool; //총알을 관리? 보관?할 큐 생성
     private List<GameObject> activeBullets; //활성화된 총알을 관리하는 리스트 생성
+    //이걸 따로 또 생성한 이유는 활성화하여 사용하고 비활성화 했을 때 사용했던 내용 자체가 그대로 저장이 되어서
+    //다시 활성화 했을 때 이전에 활성화 해서 사용되고 있던 상태 그대로 활성화가 됨
+    //그래서 날아가던 총알이 사라지지 않고 활성화 할 때 마다 보이는 버그가 생김
 
     private void Awake()
     {
@@ -45,7 +48,7 @@ public class BulletPool : MonoBehaviour
         bullet.SetActive(false);
         bullet.transform.parent = transform;
         bulletPool.Enqueue(bullet);
-        activeBullets.Remove(bullet);
+        activeBullets.Remove(bullet); //활성화되어 있던 총알 리스트에서 제거
     }
 
     //모든 활성화된 총알을 비활성화하고 풀로 반환

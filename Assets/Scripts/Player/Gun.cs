@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
             fireCoroutine = null;
         }
 
-        //모든 총알을 초기화
+        //모든 총알을 초기화 시킴
         bulletPool.ResetAllBullets();
     }
 
