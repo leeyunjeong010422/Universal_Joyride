@@ -8,10 +8,12 @@ public class BulletPool : MonoBehaviour
     [SerializeField] int poolSize = 10; //총알의 개수 (풀 크기)
 
     private Queue<GameObject> bulletPool; //총알을 관리? 보관?할 큐 생성
+    private List<GameObject> activeBullets; //활성화된 총알을 관리하는 리스트 생성
 
     private void Awake()
     {
         bulletPool = new Queue<GameObject>();
+        activeBullets = new List<GameObject>();
 
         //총알을 생성하고 비활성화 시키고 큐에 추가함
         for (int i = 0; i < poolSize; i++)
@@ -30,6 +32,7 @@ public class BulletPool : MonoBehaviour
             //총알을 꺼내서 활성화
             GameObject bullet = bulletPool.Dequeue();
             bullet.SetActive(true);
+            activeBullets.Add(bullet); //활성화된 총알을 리스트에 추가
             return bullet; //꺼낸 총알 반환
         }
         return null; //사용할 수 있는 총알이 없으면 null 반환
@@ -42,5 +45,18 @@ public class BulletPool : MonoBehaviour
         bullet.SetActive(false);
         bullet.transform.parent = transform;
         bulletPool.Enqueue(bullet);
+        activeBullets.Remove(bullet);
     }
+
+    //모든 활성화된 총알을 비활성화하고 풀로 반환
+    public void ResetAllBullets()
+    {
+        foreach (GameObject bullet in activeBullets)
+        {
+            bullet.SetActive(false);
+            bulletPool.Enqueue(bullet);
+        }
+        activeBullets.Clear(); //활성화된 총알 리스트 초기화
+    }
+
 }

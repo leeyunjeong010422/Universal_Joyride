@@ -9,11 +9,26 @@ public class Gun : MonoBehaviour
     private WaitForSeconds fireRateDelay;
     private WaitForSeconds deactivateDelay;
 
+    private Coroutine fireCoroutine;
+
     private void OnEnable()
     {
         fireRateDelay = new WaitForSeconds(fireRate);
         deactivateDelay = new WaitForSeconds(1.3f);
-        StartCoroutine(FireBullets());
+        fireCoroutine = StartCoroutine(FireBullets());
+    }
+
+    private void OnDisable()
+    {
+        //코루틴 중지
+        if (fireCoroutine != null)
+        {
+            StopCoroutine(fireCoroutine);
+            fireCoroutine = null;
+        }
+
+        //모든 총알을 초기화
+        bulletPool.ResetAllBullets();
     }
 
     public IEnumerator FireBullets()
