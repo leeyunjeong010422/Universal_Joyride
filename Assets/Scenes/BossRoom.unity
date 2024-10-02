@@ -6339,7 +6339,7 @@ MonoBehaviour:
   - {fileID: 7865935415342105898, guid: 960be201a283b7e4799ddb3edea45220, type: 3}
   - {fileID: 6490142920451743881, guid: c8d29a275ce4509469e0139fe92d8e37, type: 3}
   - {fileID: 8539780249416088054, guid: fc169605afe19534f81af728941c2f06, type: 3}
-  warningDuration: 2
+  warningDuration: 1
   blinkInterval: 0.2
   warningSize: {x: 10, y: 10}
 --- !u!61 &1003995092

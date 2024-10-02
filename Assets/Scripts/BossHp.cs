@@ -22,7 +22,7 @@ public class BossHp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            TakeDamage(2);
+            TakeDamage(3);
         }
     }
 
