@@ -12,6 +12,6 @@ public class BlinkManager : MonoBehaviour
 
     private void Start()
     {
-        text.DOFade(0.0f, 0.7f).SetLoops(-1, loopType);
+        text.DOFade(3f, 10f).SetLoops(-1, loopType);
     }
 }

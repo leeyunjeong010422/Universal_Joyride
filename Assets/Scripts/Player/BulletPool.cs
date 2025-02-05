@@ -7,15 +7,15 @@ public class BulletPool : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] int poolSize = 10; //총알의 개수 (풀 크기)
 
-    private Queue<GameObject> bulletPool; //총알을 관리? 보관?할 큐 생성
-    private List<GameObject> activeBullets; //활성화된 총알을 관리하는 리스트 생성
+    [SerializeField] private List<GameObject> bulletPool; //총알을 관리? 보관?할 큐 생성
+    [SerializeField]private List<GameObject> activeBullets; //활성화된 총알을 관리하는 리스트 생성
     //이걸 따로 또 생성한 이유는 활성화하여 사용하고 비활성화 했을 때 사용했던 내용 자체가 그대로 저장이 되어서
     //다시 활성화 했을 때 이전에 활성화 해서 사용되고 있던 상태 그대로 활성화가 됨
     //그래서 날아가던 총알이 사라지지 않고 활성화 할 때 마다 보이는 버그가 생김
 
     private void Awake()
     {
-        bulletPool = new Queue<GameObject>();
+        bulletPool = new List<GameObject>();
         activeBullets = new List<GameObject>();
 
         //총알을 생성하고 비활성화 시키고 큐에 추가함
@@ -24,7 +24,7 @@ public class BulletPool : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.transform.parent = transform;
             bullet.SetActive(false);
-            bulletPool.Enqueue(bullet);
+            bulletPool.Add(bullet);
         }
     }
 
@@ -33,7 +33,7 @@ public class BulletPool : MonoBehaviour
         if (bulletPool.Count > 0) //총알의 풀이 비어있지 않을 때
         {
             //총알을 꺼내서 활성화
-            GameObject bullet = bulletPool.Dequeue();
+            GameObject bullet = bulletPool[0];
             bullet.SetActive(true);
             activeBullets.Add(bullet); //활성화된 총알을 리스트에 추가
             return bullet; //꺼낸 총알 반환
@@ -47,7 +47,7 @@ public class BulletPool : MonoBehaviour
     {
         bullet.SetActive(false);
         bullet.transform.parent = transform;
-        bulletPool.Enqueue(bullet);
+        bulletPool.Add(bullet);
         activeBullets.Remove(bullet); //활성화되어 있던 총알 리스트에서 제거
     }
 
@@ -57,7 +57,7 @@ public class BulletPool : MonoBehaviour
         foreach (GameObject bullet in activeBullets)
         {
             bullet.SetActive(false);
-            bulletPool.Enqueue(bullet);
+            bulletPool.Add(bullet);
         }
         activeBullets.Clear(); //활성화된 총알 리스트 초기화
     }
