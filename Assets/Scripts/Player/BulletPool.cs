@@ -34,8 +34,9 @@ public class BulletPool : MonoBehaviour
         {
             //총알을 꺼내서 활성화
             GameObject bullet = bulletPool[0];
+            bulletPool.RemoveAt(0);
             bullet.SetActive(true);
-            activeBullets.Add(bullet); //활성화된 총알을 리스트에 추가
+            activeBullets.Add(bullet); // 활성화된 총알 리스트에 추가
             return bullet; //꺼낸 총알 반환
         }
         return null; //사용할 수 있는 총알이 없으면 null 반환
