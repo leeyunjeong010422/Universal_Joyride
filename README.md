@@ -7,6 +7,6 @@
   - 개발 인원: 1명
   - 사용 툴: Unity Engine 2021.3.42f1, Visual Studio 2022, Github
 - 관련 링크
-  - PPT: [PPT 링크](https://drive.google.com/file/d/1dXRv-Uik1SSwiXbuEPDfHHOTV_3otkzj/view?usp=drive_link)
+  - PPT: [PPT 링크](https://drive.google.com/file/d/1yTUR6L--24tmDkltmkOtbnxALvE3bKVE/view?usp=drive_link)
   - 시연영상 : [시연영상 링크](https://youtu.be/A28lVSGIK8M)
   - 기술문서: [기술문서 링크](https://docs.google.com/document/d/1-fCkiylGtIAMpfPs1U5GKAYWslB65D8Oaob8lAkf0Rg/edit?tab=t.0)
